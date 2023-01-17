@@ -1,4 +1,3 @@
 - hosts: all
-  become: true
   tasks:
     - package: "name=httpd state=present"

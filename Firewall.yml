@@ -22,8 +22,8 @@
     firewalld:
       service: opcom
       state: enabled
-      ports: "{{ opcom_ports }}"
-      short: "opcom"
-      description: "OpCom is a centralised Operations Command console for Windows, Linux and Solaris servers. It is used to inspect and manage servers and the services that they host."
+      port: "{{ opcom_ports }}"
+#      short: "opcom"
+#      description: "OpCom is a centralised Operations Command console for Windows, Linux and Solaris servers. It is used to inspect and manage servers and the services that they host."
       permanent: true
       zone: public

@@ -40,7 +40,7 @@
         permanent: true
       when: lsbmajdistrelease >= '7'
     - name: Add firewall rich rule for monitoring subnet
-      firewalld_rich_rule:
+      firewalld:
         zone: public
         source: "{{ item }}"
         family: ipv4

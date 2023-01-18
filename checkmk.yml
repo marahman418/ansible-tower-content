@@ -6,7 +6,7 @@
   tasks:
     - name: Download Checkmk Agent
       get_url:
-        url: https://download.checkmk.com/checkmk/2.1.0p19/check-mk-free-2.1.0p19-el8-38.x86_64.rpm
+        url: http://mycmkserver/mysite/check_mk/agents/check-mk-agent-2.1.0b1-1.noarch.rpm
         dest: /tmp/check-mk-agent.rpm
     - name: Install Checkmk Agent
       package:

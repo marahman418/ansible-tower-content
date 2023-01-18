@@ -1,0 +1,29 @@
+- name: Configure firewall
+  hosts: all
+  become: yes
+  vars:
+    opcom_ports:
+      - { port: '4291', protocol: 'tcp' }
+      - { port: '4292', protocol: 'tcp' }
+  tasks:
+  - name: Remove dhcpv6-client service
+    firewalld:
+      service: dhcpv6-client
+      state: absent
+      permanent: true
+      zone: public
+  - name: Enable ssh service
+    firewalld:
+      service: ssh
+      state: enabled
+      permanent: true
+      zone: public
+  - name: Create and enable opcom service
+    firewalld:
+      service: opcom
+      state: enabled
+      ports: "{{ opcom_ports }}"
+      short: "opcom"
+      description: "OpCom is a centralised Operations Command console for Windows, Linux and Solaris servers. It is used to inspect and manage servers and the services that they host."
+      permanent: true
+      zone: public

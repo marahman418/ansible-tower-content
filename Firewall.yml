@@ -3,8 +3,8 @@
   become: yes
   vars:
     opcom_ports:
-      - { port: '4291', protocol: 'tcp' }
-      - { port: '4292', protocol: 'tcp' }
+      - port: '4291/tcp' 
+      - port: '4292/tcp'
   tasks:
   - name: Remove dhcpv6-client service
     firewalld:

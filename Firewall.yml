@@ -11,13 +11,11 @@
       service: dhcpv6-client
       state: absent
       permanent: true
-      zone: public
   - name: Enable ssh service
     firewalld:
       service: ssh
       state: enabled
       permanent: true
-      zone: public
   - name: Create and enable opcom service
     firewalld:
       service: opcom

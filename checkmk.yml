@@ -1,0 +1,57 @@
+- name: Download Checkmk Agent
+  become: true
+  get_url:
+    url: https://mathias-kettner.de/support/1.6.0p16/check-mk-agent-1.6.0p16-1.noarch.rpm
+    dest: /tmp/check-mk-agent.rpm
+
+- name: Install Checkmk Agent
+  become: true
+  package:
+    name: /tmp/check-mk-agent.rpm
+    state: present
+
+- name: Start and enable Checkmk Agent service
+  service:
+    name: check-mk-agent
+    enabled: true
+    state: started
+- name: Install xinetd package
+  package:
+    name: xinetd
+    state: present
+
+- name: Start and enable xinetd service
+  service:
+    name: xinetd
+    state: started
+    enabled: true
+  become: true
+
+- name: Add check-mk-access line
+  lineinfile:
+    path: /etc/xinetd.d/check-mk-agent
+    line: '        only_from      = 127.0.0.1 137.108.216.32/27 137.108.216.64/26 10.10.8.15'
+    state: present
+    regexp: '(.*)only_from(.*)'
+  become: true
+
+- name: Add firewall rule for check-mk-agent
+  firewalld:
+    zone: public
+    service: check-mk-agent
+    state: enabled
+    permanent: true
+  when: lsbmajdistrelease >= '7'
+
+- name: Add firewall rich rule for monitoring subnet
+  firewalld_rich_rule:
+    zone: public
+    source: "{{ item }}"
+    family: ipv4
+    rule: "rule family='ipv4' source address='{{ item }}' accept"
+    state: enabled
+    permanent: true
+    element: service
+    servicename: check-mk-agent
+  when: lsbmajdistrelease >= '7'
+  loop: ["137.108.216.32/27", "137.108.216.64/26", "10.10.8.15"]

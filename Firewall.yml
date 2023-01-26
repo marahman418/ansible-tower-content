@@ -31,6 +31,6 @@
         - Reload-firewalld
   handlers:
     - name: Reload-firewalld
-      service:
+      systemd:
         name: firewalld
         state: reloaded

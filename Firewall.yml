@@ -24,6 +24,8 @@
         state: disabled
         permanent: yes
         immediate: yes
+      notify:
+        - Reload-firewalld
     - name: Create and enable opcom service
       firewalld:
 #       service: opcom

@@ -18,6 +18,12 @@
         state: enabled
         permanent: true
         zone: public
+    - name: Remove port 22
+      firewalld:
+        port: 22/tcp
+        state: disabled
+        permanent: yes
+        immediate: yes
     - name: Create and enable opcom service
       firewalld:
 #       service: opcom

@@ -22,7 +22,7 @@
       firewalld:
 #       service: opcom
         state: enabled
-        port: 4291-4292/tcp
+        port: 4291-4293/tcp
 #       short: "opcom"
 #       description: "OpCom is a centralised Operations Command console for Windows, Linux and Solaris servers. It is used to inspect and manage servers and the services that they host."
         permanent: true

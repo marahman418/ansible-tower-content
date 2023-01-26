@@ -27,11 +27,10 @@
 #      description: "OpCom is a centralised Operations Command console for Windows, Linux and Solaris servers. It is used to inspect and manage servers and the services that they host."
       permanent: true
       zone: public
-      
-    notify:
-      - Reload firewalld
+      notify:
+        - Reload-firewalld
 
-  - name: Reload firewalld
+  - name: Reload-firewalld
     service:
       name: firewalld
       state: reloaded

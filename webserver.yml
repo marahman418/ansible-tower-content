@@ -1,5 +1,37 @@
-- hosts: all
-  become: true
+- name: Install and configure webserver
+  hosts: all
   tasks:
-    - package: "name=httpd state=present"
-    - service: "name=httpd state=started enabled=yes"
+    - name: Install Apache webserver
+      webserver:
+        server_type: apache
+        port: 80
+        document_root: /var/www/html
+        virtual_hosts:
+          - server_name: example.com
+            port: 80
+            document_root: /var/www/example
+          - server_name: example2.com
+            port: 80
+            document_root: /var/www/example2
+          - server_name: example3.com
+            port: 80
+            document_root: /var/www/example3
+          - server_name: example4.com
+            port: 80
+            document_root: /var/www/example4
+        modules:
+          - rewrite
+        auth:
+          directory: /var/www/html/secure
+          type: Basic
+          name: "Restricted Content"
+          user_file: /etc/httpd/.htpasswd
+          requirement: valid-user
+        caching:
+          directory: /var/www/html
+          max_age: 86400
+        firewall_ports:
+          - 8080/tcp
+          - 8081/tcp
+          - 8082/tcp
+          - 8083/tcp

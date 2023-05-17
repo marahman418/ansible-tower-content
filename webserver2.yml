@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Restart httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes

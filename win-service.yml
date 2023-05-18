@@ -1,0 +1,9 @@
+---
+- name: Restart Windows Service
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Restart service
+      win_service:
+        name: audiosrv
+        state: restarted

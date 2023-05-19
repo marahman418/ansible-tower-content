@@ -1,9 +1,9 @@
 ---
-- name: Stop Windows Service
+- name: Restart Windows Service
   hosts: all
   gather_facts: false
   tasks:
-    - name: Stop Audio service
+    - name: Restart Audio service
       win_service:
         name: audiosrv
-        state: stopped
+        state: restarted

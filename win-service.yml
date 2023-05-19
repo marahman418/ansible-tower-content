@@ -6,4 +6,4 @@
     - name: Restart service
       win_service:
         name: audiosrv
-        state: restarted
+        state: started

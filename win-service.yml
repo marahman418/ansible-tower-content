@@ -1,9 +1,9 @@
 ---
-- name: Restart Windows Service
+- name: Restart Mysql80 Service
   hosts: all
   gather_facts: false
   tasks:
-    - name: Restart Audio service
+    - name: Restart Mysql80 service
       win_service:
-        name: audiosrv
+        name: mysql80
         state: restarted
